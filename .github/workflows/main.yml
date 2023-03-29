@@ -24,6 +24,6 @@ jobs:
       - name: Deploy to Render
         uses: sws2apps/render-deployment@main
         with:
-          serviceId: srv-cgi19fmbb6mopq622k2g
           apiKey: ${{ secrets.RENDER_TOKEN }}
+          serviceId: srv-cgi19fmbb6mopq622k2g
           multipleDeployment: false
