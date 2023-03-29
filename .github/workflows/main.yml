@@ -21,3 +21,11 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          service-id: srv-cgi19fmbb6mopq622k2g
+          retries: 20
+          wait: 16000
+          sleep: 30000
