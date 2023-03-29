@@ -21,12 +21,9 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+      - name: Deploy to Render
+        uses: sws2apps/render-deployment@main
         with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.POKEDEX_GITHUB_TOKEN }}
-          service-id: srv-cgi19fmbb6mopq622k2g
-          retries: 20
-          wait: 16000
-          sleep: 30000
+          serviceId: srv-cgi19fmbb6mopq622k2g
+          apiKey: ${{ secrets.RENDER_TOKEN }}
+          multipleDeployment: false
