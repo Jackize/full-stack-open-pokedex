@@ -25,6 +25,7 @@ jobs:
         uses: bounceapp/render-action@0.6.0
         with:
           render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.POKEDEX_GITHUB_TOKEN }}
           service-id: srv-cgi19fmbb6mopq622k2g
           retries: 20
           wait: 16000
