@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Install dependencies
         run: npm install
       - name: Check style
@@ -27,8 +28,7 @@ jobs:
           apiKey: ${{ secrets.RENDER_TOKEN }}
           serviceId: srv-cgi19fmbb6mopq622k2g
           multipleDeployment: false
-      - name: Deploy to Fly.io
-        uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - name: Deploy to Fly
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
