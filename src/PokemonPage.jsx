@@ -15,6 +15,7 @@ const PokemonPage = ({ previous, next }) => {
     return <LoadingSpinner />
   }
   if (error) {
+    console.log(error)
     return <ErrorMessage error={error} />
   }
 
