@@ -28,4 +28,7 @@ jobs:
           serviceId: srv-cgi19fmbb6mopq622k2g
           multipleDeployment: false
       - name: Deploy to Fly.io
-        run: npm run deploy
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
