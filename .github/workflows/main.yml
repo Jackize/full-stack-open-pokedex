@@ -27,3 +27,5 @@ jobs:
           apiKey: ${{ secrets.RENDER_TOKEN }}
           serviceId: srv-cgi19fmbb6mopq622k2g
           multipleDeployment: false
+      - name: Deploy to Fly.io
+        run: npm run deploy
