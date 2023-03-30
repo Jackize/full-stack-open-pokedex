@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
       
 jobs:
   simple_deployment_pipline:
@@ -22,13 +25,15 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      - name: Deploy to Render
+      - if: ${{ github.event_name == 'push' }}
+        name: Deploy to Render
         uses: sws2apps/render-deployment@main
         with:
           apiKey: ${{ secrets.RENDER_TOKEN }}
           serviceId: srv-cgi19fmbb6mopq622k2g
           multipleDeployment: false
-      - name: Deploy to Fly
+      - if: ${{ github.event_name == 'push' }}
+        name: Deploy to Fly
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
