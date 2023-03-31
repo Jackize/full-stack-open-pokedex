@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
       
 jobs:
-  simple_deployment_pipline:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -37,3 +37,14 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - if: ${{ github.event_name == 'push' }}
+        name: Patch version and push tag
+        uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+          DEFAULT_BUMP: patch
